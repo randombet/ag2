@@ -8,7 +8,7 @@ from unittest.mock import MagicMock, patch
 
 import pytest
 
-from autogen.agentchat.contrib.claude_code_agent import (
+from autogen.agentchat.contrib.claude_code_cli_tools import (
     _get_claude_code_config,
     _run_claude_code_command,
     _set_claude_code_config,
@@ -410,7 +410,8 @@ class TestClaudeCodeIntegration:
         assert "error" in file_result or "Error" in str(file_result)
 
         # All other functions should succeed with file-based simulation
-        analysis_result = claude_code_analysis("analyze", "test.py")
+        # Use an existing file for analysis
+        analysis_result = claude_code_analysis("analyze", "calculator.py")
         assert analysis_result["success"] is True
 
         generation_result = claude_code_generation("create", "test function")
